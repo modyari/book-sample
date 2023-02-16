@@ -1,0 +1,769 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>Chapter 3: Managing Your Code</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="84b83fb3-1cf0-4c42-8c76-e701307294ee" class="page sans"><header><h1 class="page-title">Chapter 3: Managing Your Code</h1></header><div class="page-body"><nav id="ff13038a-7abf-42a7-ac9a-a443604ee99c" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#c96109ad-45b0-40c3-aacc-32c336e2885c"><em>3.1 Overview: The Paradigms of Managing Your Code in Unity</em></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#65e99415-54d4-4b5e-aca4-edf67426596d"><em>3.2 Workflow Considerations</em></a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#fbe627c1-22a1-4874-b0d3-d83b23c12695"><em>3.3 Unity’s Default Paradigm</em></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#86ca9d01-f192-436e-af63-e59f2214fcbf">The prototype paradigm</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#822846f9-364f-4c46-a603-58f938ed1ac3">The Good</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#23944337-088f-4786-9cd2-140a26abf79d">The Bad</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#99d5c363-a726-4fe8-8063-e3f78fa38d4a">Prone to messiness and lack of conventions</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#c54e3f10-8682-49a7-aa57-3b1fccc56f2a">Data representation </a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#900d6794-a2fe-432f-bc18-2927d4edf2d4">Workflow complications</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#d723d14d-804b-4d54-8a09-a2e6be9ae650">Level editor mismatch</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#44c898f7-134d-4aca-8574-737910f21cdb"><em>3.4 Service Singleton Paradigm</em></a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#56b5a2b7-86da-41a5-8a49-e9fa19ebcb79">Singleton Abuse</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#7be06399-26c1-43bb-ac2b-10240a2fb111">Enter: Service Singletons</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#fc41ff69-7dea-4b81-a712-c4c758567c81">The Good</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#bf2d3e03-2434-47fb-b94f-12f8584141eb">Example: Reset!</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#95e24cc7-7648-4156-9501-1452e43f2df4">The Bad</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#6b1a5070-9c0b-478c-aa37-23edb5509b45">Idealistic</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#392a87b1-86a5-463f-a0c8-4d16bb2413c4">Redundancy</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#0a70a2d9-c572-4beb-9f71-5beea30c9195"><em>3.5 </em>Dependency Injection Paradigm</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#37e10d4b-293e-4108-8067-310e4a3d0387">The purpose</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#060ba8ef-8c80-4725-a6ee-72d81f141cbb">Scenario</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#838ea28a-2add-4135-8868-cf8d519d0328">What just happened?</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c573628e-fbe7-483b-bb66-63928bfb5bf7">What happens next?</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ce6aac11-eecc-41a0-86a4-5047620b92d2">Implementing GameSystem</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#9fa30fe0-b358-446c-874a-e9ce856fe050">Implementing GameController</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c999aced-5091-431b-af73-d715310f2abf">The Good</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#c788effa-35e2-4e57-a914-536f9c3673dc">Easy to debug and test</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#664b608a-4081-4f0f-b87c-88cbccf11ebc">Common references are automatically available</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#ba00b71d-ca6f-44b6-a0a6-ca16839e2a44">Decoupling setup and data</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#9180d057-91d0-4e08-abce-8a949657a77f">Decoupling game systems and state</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ba24cf95-bcbf-458d-8cb4-7ee0c3105a0a">The Bad</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#42af16a6-a015-401e-83d6-46ba3cca33d2">A bit complicated to understand</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#4c2fd9c0-c970-4ffc-b2f7-408442b08d27">Not perfect for every scenario</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#8bbc369b-4ef8-47df-b8d7-bd31487cddf4">Might need more editor tools</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3ea9a63e-5687-42b3-b3b3-06d132397bb2"><em>3.6 </em>Next Steps: Figuring Out a Suitable Paradigm</a></div></nav><h1 id="c96109ad-45b0-40c3-aacc-32c336e2885c" class=""><em>3.1 Overview: The Paradigms of Managing Your Code in Unity</em></h1><p id="f80cd756-682d-456d-96cb-6d0b97f4ca72" class="">The way you manage your features and their lifecycles is likely going to vary a lot between projects. </p><p id="f2b6b25b-6b6e-4555-bc20-d380e99dd462" class="">If you’re making a fighting game for example, your paradigm is likely going to utilize a data-driven approach as optimally your features are going to be outnumbered by the amount of data (E.g. hitboxes for every frame and their properties) that need to be adjustable on the fly. This same paradigm won’t be very ideal if you’re making a shooter, for example.</p><p id="e435a2d5-58ad-4cb2-9a3e-42d55f222e08" class="">I’m borrowing the term <em>“paradigm” </em>loosely here, but a design paradigm is any framework of ideas and philosophies that put forward a solution as optimal for a given problem.</p><p id="42bbb636-f53c-4bd9-91db-625fc014454a" class="">In this chapter we’ll briefly examine what I call “Unity’s default paradigm”, and introduce some example paradigm design choices that might inspire your custom solutions.</p><p id="779033f6-268d-476f-807a-df4b68a4403d" class="">
+</p><hr id="5fb56115-8664-44c8-95c3-ec133bb1e5ba"/><h1 id="65e99415-54d4-4b5e-aca4-edf67426596d" class=""><em>3.2 Workflow Considerations</em></h1><p id="20128a20-bd70-45e6-9f6a-605744d7e9ae" class="">In Unity, the paradigm you follow might end up heavily influencing your workflow for the better or the worse. </p><p id="6f4e6dd1-ade6-4494-b3ff-58747546b340" class="">Traditionally, game developers used to make their level editors from scratch. These level editors were custom to the game’s exact needs. 
+This is the editor used by id software to develop the first Doom, for example.</p><figure id="ca9efb3f-ed16-4045-822d-be6e01afc245" class="image"><a href="Chapter%203%20Managing%20Your%20Code%2084b83fb31cf04c428c76e701307294ee/DoomEd.png"><img style="width:1024px" src="Chapter%203%20Managing%20Your%20Code%2084b83fb31cf04c428c76e701307294ee/DoomEd.png"/></a></figure><p id="f3d095e0-563d-4f9e-a3ee-8d057221e833" class="">Luckily, we have the Unity editor nowadays, which comes with a fully-featured scene editor for us.</p><p id="f8e79d0a-25e8-4e9e-ac6f-a1a705664ee9" class="">However, at first, the comfort of Unity’s scene editor might push many to follow a paradigm that’s not intended for their specific case. </p><p id="97a7ed64-8573-45f8-8e6e-150bc0ffacf6" class="">For example, Unity’s scene editor might not be very suitable when you’re making the fighting game from the example earlier. It’s one of those cases where you might need to make your own custom editor so you can adjust the hitboxes on your characters per frame, group these animation frames by a move set, and set their other generic attributes.</p><figure id="31ea5581-dded-49e3-8088-85d287191d56" class="image"><a href="Chapter%203%20Managing%20Your%20Code%2084b83fb31cf04c428c76e701307294ee/2d_fighter_maker_2002_work.jpg"><img style="width:640px" src="Chapter%203%20Managing%20Your%20Code%2084b83fb31cf04c428c76e701307294ee/2d_fighter_maker_2002_work.jpg"/></a></figure><p id="a4529085-f9ad-44de-84a8-a6e83f150d40" class="">In most cases, you wouldn’t necessarily need to go this far. We won’t be discussing extending the editor in this chapter, but it’s good to consider how you can make your workflow as painless as possible on the long-term. </p><p id="c6303eae-cbce-4450-ab62-699669bfedfd" class="">A successful paradigm is one where your code makes sense, doesn’t force you to keep repeating the same setup, and saves you the most time. How your features relate to each other, how they’re loaded/unloaded, how they’re represented. These ideas are good to think about, and they usually result in custom solutions for your needs.</p><p id="da9baaa1-13fd-4c89-89b0-ea64c5608d45" class="">If this sounds scary, don’t fret. It’s a big topic. And any progress here is going to improve your ability to come up with solutions, so it’s only up from here.</p><p id="2d0b4502-36e4-478b-bcb2-f80e3b691e1f" class="">
+</p><hr id="3ca917e8-b865-48a1-9cf8-0c342e729563"/><h1 id="fbe627c1-22a1-4874-b0d3-d83b23c12695" class=""><em>3.3 Unity’s Default Paradigm</em></h1><p id="c1a34996-dcd8-4b90-8cd1-abe56456c587" class="">It’s a bit hard to define what I mean by <em>default paradigm</em>, mainly because it can span many sophisticated solutions that work. But it’s less about defining what you can build on top of this paradigm, and more so about describing going at the problem with the default practices vanilla Unity encourages. Which is what most Unity tutorial teaches, making it probably the most common paradigm.</p><p id="6853c4cf-cea5-486a-aa48-34b1529dfd22" class="">Think of a scenario where you’re making a fighting game. Your characters need an x number of hit and hurt boxes that vary between almost every single frame usually. Clearly, you can replicate the same effect with box colliders, but it’s an incredible workflow hassle. Yet, it’s the default paradigm that comes out of the box with Unity. Using that, instead of implementing a simple data-driven solution, is exactly what it means to use Unity’s default paradigm.</p><h3 id="86ca9d01-f192-436e-af63-e59f2214fcbf" class="">The prototype paradigm</h3><p id="1a9c8926-d0b9-4728-aa11-08d6cc91f104" class="">One of Unity’s biggest selling points is how fast it is to learn and start producing games with.</p><p id="9206d8fc-f175-47ad-97d5-b0bbf1eaa5a7" class="">This is thanks to it’s time-saving features such as the scene editor, the managed lifecycle, and many others. This is the reason why a lot of Unity tutorials teach you to utilize these paradigms so you could start making games immediately.</p><p id="4f369d93-560a-4d90-a109-7fcaf1cf61cf" class="">Problems start to pile up quickly when you work within this paradigm to develop anything bigger than a prototype. For starters, the editor and workflow might not be tailored specifically for your project needs. </p><p id="9514d66f-78cf-4c4b-82a7-92a0b8e7c7bb" class="">Yet, from my experience, it seems that the majority of indie and new developers power through this paradigm. A lot of them do it with success, too. Which is to iterate:<em> the purpose here is to make your life easier, not to make your code functional.</em></p><h2 id="822846f9-364f-4c46-a603-58f938ed1ac3" class="">The Good</h2><p id="ae7e0903-0bf6-473f-a954-b5fcc822ec16" class="">Perfect for many scenarios and great for prototyping.</p><h2 id="23944337-088f-4786-9cd2-140a26abf79d" class="">The Bad</h2><h3 id="99d5c363-a726-4fe8-8063-e3f78fa38d4a" class="">Prone to messiness and lack of conventions</h3><p id="fbe618a4-c732-46b0-b936-19e00a4ab7ae" class="">Since this paradigm encourages you to code away at a feature until things work, scripting each scenario as needed, the result is often messy, coupled features that need to access other features somehow. This also results in code that doesn’t really fit in together, and on-off scripts. There’s usually no natural place in the architecture that your features fall into, and things grow generally hard to track due to the lack of hierarchy.</p><p id="fb8c48fa-a071-4c1e-8f13-23abc5c6a0c9" class="">A side effect here is that getting other developers acquainted with your code (including yourself after a few months) might be a rough experience.</p><h3 id="c54e3f10-8682-49a7-aa57-3b1fccc56f2a" class="">Data representation </h3><p id="e28681ea-73ae-4f23-9e56-98b7af85c7b1" class="">Scene files might be great for a platformer, but they aren’t the best representation for the kind of data a rhythm game needs.</p><h3 id="900d6794-a2fe-432f-bc18-2927d4edf2d4" class="">Workflow complications</h3><p id="9aaec882-bf7e-4a80-9728-2b4daf4934fd" class="">In a top-down RPG where your character has to travel through 70 maps, each of them represented by a scene file, and they all directly reference each other, removing one of the scenes might end up breaking your game. And you have nothing that warns you about that. </p><p id="547b2f36-76f2-41e6-9640-245c71bef35c" class="">If you don’t setup your scene with proper prefabs, then adding a new feature to every scene might be a nightmare. A worse nightmare is if that one prefab in every scene accidentally breaks.</p><p id="e6464d81-f8b7-4ada-b816-728a8302201c" class="">Having no source of truth for your assets and gameplay flow that you can adjust on the fly means you’ll have to track everything manually, which is just extra cost you don’t want to manage. </p><h3 id="d723d14d-804b-4d54-8a09-a2e6be9ae650" class="">Level editor mismatch</h3><p id="eff719b2-e6f3-4bf8-ba1f-f0a33973b7ba" class="">The Unity scene editor is probably ideal for multiple kind of games, especially with 3D environments. But for many others, without any editor extensions (which is how most people use it), it lacks the proper tools that directly relate to your workflow.</p><p id="c9343b40-bada-4db9-b514-d5e46cbd3fd5" class="">
+</p><hr id="46d102c0-fa0f-470e-869f-c966b776ba41"/><h1 id="44c898f7-134d-4aca-8574-737910f21cdb" class=""><em>3.4 Service Singleton Paradigm</em></h1><p id="8a9dde1a-9a03-48d6-8cd3-c595e60d5a8c" class="">The singleton design pattern is a popular pattern which helps you ensure that there’s only one instance of your class. In C#, this instance is usually accessible through a property. If your class is ClassName and the property is Instance, then you can access this instance from anywhere through ClassName.Instance. I wrote a chapter about the design pattern <span style="border-bottom:0.05em solid">which you can check out here</span>. </p><h3 id="56b5a2b7-86da-41a5-8a49-e9fa19ebcb79" class="">Singleton Abuse</h3><p id="deba4370-c5cd-47ee-be6d-5eb34fc3a939" class="">Singletons are probably the most commonly implemented design patterns in Unity. Being able to grab the instance of another class without having to pass it in the inspector or otherwise is a huge plus. </p><p id="695adb8f-4151-4f03-943f-25d32285801a" class="">They happen to also be one of the most abused.</p><p id="8d5eae2e-f069-4908-81a8-f814fd584488" class="">In the case of singletons, this results in heavily coupled code with all guards down. I’ve seen instances where class A would access the instance of class B, and class B would also access the instance of class A.</p><p id="ab8c9e53-37e3-4952-9aaf-c127ee47e805" class="">This is why singletons are often described as an anti-pattern. The purpose of these paradigms is to make it so each feature fit in a natural place, therefore segmenting it into smaller pieces that manage each other in order. Cyclic-dependency doesn’t help that cause.</p><h3 id="7be06399-26c1-43bb-ac2b-10240a2fb111" class="">Enter: Service Singletons</h3><p id="c53f563f-3ec0-439c-9fce-c433f9813472" class="">To say that this paradigm is anything new would be a lie. It’s simply the result of marrying the singleton pattern with the dependency rule, <span style="border-bottom:0.05em solid">which I also talk about here.</span></p><figure id="4761200d-bfc6-4f59-a4d5-2555cba57263" class="image"><a href="Chapter%203%20Managing%20Your%20Code%2084b83fb31cf04c428c76e701307294ee/Untitled_Diagram.drawio(4).png"><img style="width:461px" src="Chapter%203%20Managing%20Your%20Code%2084b83fb31cf04c428c76e701307294ee/Untitled_Diagram.drawio(4).png"/></a></figure><p id="d985208e-f1af-41a1-aad0-c97108d4e3cb" class="">The idea here is to only implement the classes at the top layer of your application as singletons, then imagine them as services. What do I mean by that?</p><p id="34b17201-b324-43aa-8884-3ddcc0d0be0f" class="">It’s a concept inspired from web development. A common architectural design in web applications is to implement different “microservices” that take care of different responsibilities. For example, you might have a microservice for messaging, one for processing video, etc. </p><p id="755f0d40-bb6d-44d6-8ef9-ef5989c592f5" class="">When you want to use one of these microservices, you don’t really need to think of their underlying logic. You’d pass the video microservice a video to process, and it gives you back an id to use, for example.</p><p id="68be8121-7419-4a0c-85ab-e3844a9bbc6d" class="">We can utilize this philosophy to manage our features. For example, the underlying save logic could change from using XML, to JSON, to utilizing a web service, the rest of our application shouldn’t be concerned about that. Other parts of your code should simply be able to ask your save system to save, wait until it’s done saving, then continue.</p><p id="23910719-5eab-45d2-a4be-bd6fa334c315" class="">Your menu UI for example could do this:</p><pre id="f62c9658-a7ba-4648-9815-f3f23d02ee1b" class="code"><code>yield return SaveSystem.SaveAsync();
+// Inform whatever is handling the game state that we can regain control
+OnFinishedSaving?.Invoke(); </code></pre><p id="be2c7969-303a-4cf4-a242-a78d8b16237b" class="">Let’s summarize the rules that would ensure the consistency of this paradigm:</p><ul id="61488a1c-0daa-488a-9507-b0831ab32b92" class="bulleted-list"><li style="list-style-type:disc">Make sure your features are implemented in layers as much as possible</li></ul><ul id="17092615-a0e3-4657-969a-c069991ed432" class="bulleted-list"><li style="list-style-type:disc">For the most part, only the top layers should be implemented as singletons</li></ul><ul id="b4681b52-774f-4aae-af73-eb8b0dc42cf1" class="bulleted-list"><li style="list-style-type:disc">To access a child feature, communicate with the service</li></ul><ul id="d1a362ea-1bdf-4f63-b4a0-1eb5a1115983" class="bulleted-list"><li style="list-style-type:disc">Service manages features, features manage sub-features, and so on</li></ul><ul id="58002164-d214-4b66-9ca2-454ea11cfa4d" class="bulleted-list"><li style="list-style-type:disc">A class in an upper layer can access the lower layer it manages, lower layer fires events that the upper layer class listens to</li></ul><ul id="74a149b2-5d64-47ce-984d-528a1f746c3a" class="bulleted-list"><li style="list-style-type:disc">Lower layer classes don’t reference a class in their upper layer</li></ul><h2 id="fc41ff69-7dea-4b81-a712-c4c758567c81" class="">The Good</h2><p id="2b7c1acd-2f77-47c6-a013-0be98469a83a" class="">Segmenting your features in this way allows things to be far more manageable. For once, you have fewer interaction points with other features. But also, you don’t have to worry about underlying features, because everything trickles down. Let’s see some examples.</p><h3 id="bf2d3e03-2434-47fb-b94f-12f8584141eb" class="">Example: Reset!</h3><p id="b1401afb-3a22-483a-8c20-0de6a25adcd1" class="">Say we want to implement a level reset. This will require the NPCs dialogue to reset if you’ve talked to them, all the items to reset, and so on. The point is, we have a lot of resetting logic, and it all translates to different things depending on the feature.</p><p id="642a8638-b6ff-449d-a3bb-3bf32d820bf1" class="">Maybe you might suggest reloading the scene, but in our game, entities remember. If you picked up an item, it won’t be there when you revisit. If you advanced the dialogue with your NPCs, they won’t start over if the interaction was recorded.</p><p id="516a0011-cfe2-44ce-9866-df7737971694" class="">Without delving too much into that, take a moment to think of how’d you implement this without this paradigm.</p><p id="9d69cf11-4fa7-4c6e-8c31-074e546b4e7b" class="">First thing to note is that you need a reference for each NPC and item in the scene to start (you’ll likely have a lot more features to track in the future)…but also, they might require unique resetting logic. </p><p id="88cec51f-37ae-4648-bc78-fb4870f07c24" class="">In this paradigm, your level service (or LevelManager) would simply refer to the other services that require a reset. For the sake of example, say they all implement an interface IResettable that has a method Reset(). And maybe the LevelManager has a list of IResettable that currently include our NPCManager and ItemsManager.</p><p id="98f64f52-092b-47e0-89f5-b7888301ad99" class=""> </p><pre id="040a6a5f-874f-4836-8d4f-add9f33e002e" class="code"><code>foreach(var r in resettables)
+{
+	r.Reset();
+}</code></pre><p id="8e8c0168-8f52-446b-9a79-8953397c58f2" class="">That’s it. Our implementation of this feature is done. </p><p id="31e2bcdf-dfc5-430f-8edd-b85543a12ccf" class="">For our resetting logic, it could be that the manager goes through the items and resets their states and positions, it could be that it calls a method on each item to reset it, these details shouldn’t matter to our LevelManager. It only calls the responsible services and that’s it, someone else could implement them. Remember the video microservice example.</p><h2 id="95e24cc7-7648-4156-9501-1452e43f2df4" class="">The Bad</h2><h3 id="6b1a5070-9c0b-478c-aa37-23edb5509b45" class="">Idealistic</h3><p id="0dd2b242-ca09-43b9-877f-20bc7806aa64" class="">There’s perhaps an idealistic expectation with this architecture. Some of your features might be one-offs that don’t fit under something else holistically, which might result in more singletons than you’d initially expect. However, that’s not an entirely bad thing when compared to the benefit.</p><h3 id="392a87b1-86a5-463f-a0c8-4d16bb2413c4" class="">Redundancy</h3><p id="689cbee6-224d-451b-ab89-8d1d7f55b8d2" class="">Say you have an ItemsManager that manages all items, and the rule here is that we can’t access them directly. But we want to listen to and show a UI notification when an item gets picked up. </p><p id="988f64e5-744d-458b-b1a3-3cb6017a9f86" class="">To implement this you’d have an event on the item itself.</p><pre id="ac8e545f-6e24-4d56-90db-9cbd6ce91796" class="code"><code>OnItemPickedUp?.Invoke(this);</code></pre><p id="7a1873f7-d041-4aa5-98e0-e6edf9eb2fe5" class="">Which gets fired when the item is picked up.</p><p id="0220f1af-a6a8-4028-b5d7-d8e9116594b0" class="">Now the ItemsManager listens to this event from all items, and fires an identical event.</p><pre id="6f16277a-4fab-40d6-b6a3-f69444467528" class="code"><code>private void Awake()
+{
+	foreach(var item in items)
+	{
+		item.OnItemPickedUp += HandleItemPickedUp;
+	}
+}
+
+private void OnDestroy()
+{
+	foreach(var item in items)
+	{
+		item.OnItemPickedUp -= HandleItemPickedUp;
+	}
+}
+
+private void HandleItemPickedUp(Item item)
+{
+	OnItemPickedUp?.Invoke(item);
+}</code></pre><p id="d831e579-8619-40a0-a704-ae67bad0117a" class="">As you can see here, it feels redundant to have an event fire only to invoke an identical event. I’ve seen developers criticizing this, and others defending it. But it’s generally fine as long as you understand the trade-off.</p><p id="dc49a988-eb62-40f3-9777-fe2226177b79" class="">Alternatively, you can just make the event static in the Item class.</p><pre id="59f5361e-992c-4c47-8d7c-41ce68563684" class="code"><code>public static event Action&lt;Item&gt; OnItemPickedUp;</code></pre><p id="19270657-2c7a-4ae4-8dfb-6239143e45ac" class="">So you can do this using the Item class, and avoid the middleman altogether in this case.</p><pre id="bc6e9207-ab3f-4eb0-b72f-c6baa490788c" class="code"><code>Item.OnItemPickedUp += //...</code></pre><p id="30f74d1f-d322-41f2-96c2-3ffc717d39c7" class="">Please try not to do this with methods. Events are usually a unique case.</p><p id="1cd0b2bb-4289-40f8-a38e-bb57ee8fc1fd" class="">
+</p><hr id="1bef2ccc-c67c-45fb-86f5-4581e2c758df"/><h1 id="0a70a2d9-c572-4beb-9f71-5beea30c9195" class=""><em>3.5 </em>Dependency Injection Paradigm</h1><p id="14fdf413-e64a-4998-96a6-16f7e00fc35c" class="">Dependency injection (DI) is a technique often used to write classes that aren’t specifically tied to the source of their dependencies. This sounds complicated, but it essentially means that instead of your script grabbing its dependencies, the dependencies are given (injected) into your script. </p><p id="136bd924-8a10-44d8-9117-90261f6ed62a" class="">There are many ways of implementing this, some more complicated than others. But to understand this, let’s first start with the purpose of DI, and how it can benefit us in Unity</p><h3 id="37e10d4b-293e-4108-8067-310e4a3d0387" class="">The purpose</h3><p id="24c2fde2-482e-4a7e-86c6-d3608244b930" class="">What makes DI a very popular paradigm in various software domains, is that it allows you to write features that can be tested easily. If your feature grabs its values, then we might have a hard time when we want to test specific values. With DI, the feature expects to be given said values, so we can inject it with whatever values we want to test it with.</p><p id="a4292dd3-f604-4e46-a803-5b420c6e79a0" class="">In Unity, we can utilize this to write systems that are loadable in different contexts. You can, for example, load a system and inject it with a specific state to replicate a certain bug (E.g. can still buy items even if slots are full).</p><p id="4863ea66-f846-4ad1-8080-00175550e8e0" class="">I’ve personally implemented a DI architecture before where loading my systems in a specific context (gameplay, level editor, test data) was possible just based on the scene I was loading them from. </p><p id="6fc4731c-238a-4dc7-8b24-4a2397c1ab8b" class="">Let’s see how an implementation of this could look like.</p><h3 id="060ba8ef-8c80-4725-a6ee-72d81f141cbb" class="">Scenario</h3><p id="9ea55a7a-e8db-4a51-989b-77d1db0b9c13" class="">Imagine we’re making an RPG game. In this game, the player could either be in the main gameplay, a shop, a battle sequence, or a cutscene. </p><p id="104c3411-961d-41ff-b9ac-92bd79bde972" class="">We want to make our setup robust, so we make this crazy decision: every map is a prefab! </p><p id="cb24381b-ffb5-4e32-b906-614fbaa83a3c" class="">Basically, we want to keep our generic setup present in every scenario, so every “system” from the previously mentioned ones will live in its own scene. When it’s time to load map A, which we prepared as a prefab, we’ll load it through addressables (If you’re not familiar with addressables, it’s a way to load a prefab with an address/ID).</p><p id="8eefc7eb-1b3a-4d37-9820-b22d11454ac7" class="">To control all of this, we’ll have a launch scene. We have a “GameController” in this scene, responsible for managing loading and initializing the proper system/data. It also has a generic setup, and it injects it (along with other data) into the system script that resides in the new scene. Let’s say these systems present in each scenes inherit from base class GameSystem.</p><figure id="84237d42-c218-4d46-813e-e4dc1b7cdded" class="image"><a href="Chapter%203%20Managing%20Your%20Code%2084b83fb31cf04c428c76e701307294ee/EZU8DdBWsAA4mID.png"><img style="width:816px" src="Chapter%203%20Managing%20Your%20Code%2084b83fb31cf04c428c76e701307294ee/EZU8DdBWsAA4mID.png"/></a></figure><p id="37cd1246-46ad-442c-a573-126233d6f43c" class="">So when we launch our game (from scene launch_scene):</p><ol type="1" id="e0d8f16c-21ee-4f91-9555-db0849da9eb1" class="numbered-list" start="1"><li>GameController initializes</li></ol><ol type="1" id="c2b983cf-0e73-4c2a-a019-d79d204c8ecc" class="numbered-list" start="2"><li>Configured to load map with address start_map and game system MapGameSystem</li></ol><ol type="1" id="c559af07-98d5-4171-ba53-47eee270c93a" class="numbered-list" start="3"><li>Loads the MapGameSystem scene <strong>additively</strong></li></ol><ol type="1" id="c3f20f5b-9847-4386-bc19-dbad2b22e616" class="numbered-list" start="4"><li>Uses FindObjectOfType&lt;GameSystem&gt;() and initializes (injects) it with references from the generic setup (E.g. camera system, save manager, sound manager, etc), and also with relevant data to this run, and also loads the map in that scene</li></ol><p id="8bd4415a-79bd-413e-8058-7d0110c824b6" class="">When this finishes loading, it might look like this:</p><figure id="8cbb1b2b-a654-4e65-ad0a-2a84a65d6a57" class="image"><a href="Chapter%203%20Managing%20Your%20Code%2084b83fb31cf04c428c76e701307294ee/Untitled.png"><img style="width:480px" src="Chapter%203%20Managing%20Your%20Code%2084b83fb31cf04c428c76e701307294ee/Untitled.png"/></a></figure><h3 id="838ea28a-2add-4135-8868-cf8d519d0328" class="">What just happened?</h3><p id="c86dbba8-8ea6-4379-bee9-3d147f2d1ca2" class="">We’ll break this down in code. But basically, the GameController loaded the appropriate map game system scene, initialized the GameSystem with the references it needs, then spawned the first map.</p><h3 id="c573628e-fbe7-483b-bb66-63928bfb5bf7" class="">What happens next?</h3><p id="e1ab70b2-f556-49af-abd1-6fd2c8016281" class="">When the player enters a shop, an event will be fired. This will tell the GameController that the game system ended, and it should next load the shop game system, with the matching prefab ID for the shop.</p><h3 id="ce6aac11-eecc-41a0-86a4-5047620b92d2" class="">Implementing GameSystem</h3><p id="fb861840-b57f-4e6d-a17e-878a819bb893" class="">Here’s an example of how our base GameSystem class might look like</p><pre id="c0b075e7-64be-4e98-966f-484432311254" class="code"><code>public abstract class GameSystem : MonoBehaviour
+{
+    // When this GameSystem wants to finish, invoke this event
+    // GameSystemResult is just a class reporting where to go next
+    public event Action&lt;GameSystemResult&gt; OnFinished;
+    public GameSystemArgs Arguments { get; private set; }
+    // Initialize = Inject
+    public virtual void Initialize(GameSystemArgs args)
+    {
+        Arguments = args;
+    }
+    // Cleanup when unloading
+    public virtual void Terminate()
+    {
+    }
+    // Call this to finish and move to another GameSystem
+    public void Finish(GameSystemResult result)
+    {
+        OnFinished?.Invoke(result);
+        Terminate();
+    }
+}</code></pre><p id="b628bd25-77f3-44e0-bcd1-365ccb373655" class="">So after GameController finds the GameSystem in this scene, it’ll call Initialize with the arguments, effectively injecting all the references/data. We’ll talk about GameSystemArgs next, but basically, since we could add more arguments later, instead of going back and modifying that in every GameSystem, I simply made a wrapper class.</p><p id="b29977cc-a8bf-4139-b1d4-d43949da98d5" class="">When the GameSystem is done and the game should go somewhere else (e.g. a specific shop), Finish(result) is called. The GameSystemResult is just an object passed back to the game controller to let it know which room and game system it should load next (in this example, say shop_12 and shop_game_system)</p><p id="0641a123-bb2d-4862-91cd-996e2703af12" class="">The GameSystem then invokes OnFinished, and passes back the GameSystemResult to our GameController, which will unload this GameSystem and loads the next one based on the result object it received.</p><p id="29321b1d-2cb9-4d29-b999-776eea9682ef" class="">Let’s take a look at an example of the arguments we could be passing to our game system</p><p id="da57e754-3908-47c8-9095-c1d4ee8c8e41" class=""> </p><pre id="f6c5b725-da36-498b-8c69-23dff2d5d13b" class="code"><code>public class GameSystemArgs
+{
+    public CameraController Camera { get; set; }
+    public InputSystem Input { get; set; }
+    public SoundSystem Sound { get; set; }
+    public GameConfig GameConfig { get; set; }
+    public DataService DataService { get; set; }
+}</code></pre><p id="96f10672-6b9f-4850-a185-291fb83dbf55" class="">As you can see, it’s just the necessary references. The DataService contains a map of keys for each item the player has, which doors are unlocked, events that happened so far, etc.</p><pre id="786e9b44-7c85-484d-9a19-7c4b0fbf80ad" class="code"><code>public class GameSystemResult
+{
+    public string RoomName { get; set; }
+    public GameSystemType GameSystemType { get; set; }
+}</code></pre><p id="b5518a44-8e23-4246-93c2-8818d21be0bf" class="">The GameSystemResult returned from our GameSystem simply just indicates what room to load next and the system type for it.</p><p id="23d4ed10-67a0-495c-a6b0-adbc9d81d5ac" class="">By inheriting from GameSystem, you can have MonoBehaviours that the GameController can manage.</p><h3 id="9fa30fe0-b358-446c-874a-e9ce856fe050" class="">Implementing GameController</h3><p id="1d37c2cd-42b4-4f95-a79d-a0bc3819df58" class="">The GameController is going to be an ordinary class that has references to the generic setup in the launch scene. The most important bit probably happens in the method that loads and injects into a game system. </p><p id="a27990f7-04a7-4a7f-990f-5fe7300c53b4" class="">Here’s our coroutine for doing so, along with comments.</p><pre id="3d4e81da-0ec8-4da3-9cf3-036ec1f5c245" class="code"><code>private IEnumerator LoadGameSystemAsync(string roomName, GameSystemType gameSystemType)
+{
+    // Cache the previous game system so we can unload it if available
+    GameSystem prevGameSystem = currentGameSystem;
+    // Get the desired scene name. This is stored in our config based on the type.
+    var sceneName = gameConfig.GetSceneName(gameSystemType);
+    // Unload the previous game system
+    if (prevGameSystem != null)
+    {
+        yield return UnloadGameSystem(prevGameSystem);
+    }
+    // Load the new game system&#x27;s scene additively
+    yield return SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+    // Set active scene to new game system scene so we can start operating on it
+    SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
+    // Find the new game system from the loaded scene
+    currentGameSystem = FindObjectOfType&lt;GameSystem&gt;();
+    // No game system = something must be wrong
+    if (currentGameSystem == null)
+    {
+        Debug.LogError(&quot;No GameSystem instance found in this scene&quot;);
+        yield break;
+    }
+    // Listen to when the new game system is finished
+    currentGameSystem.OnFinished += CurrentGameSystemFinishHandler;
+    // New arguments object
+    var gameSystemArgs = new GameSystemArgs()
+    {
+        GameConfig = gameConfig,
+        Input = input,
+        Camera = camera,
+        DataService = dataService,
+        Sound = sound
+    }; 
+    // Inject the arguments to our new game system
+    currentGameSystem.Initialize(gameSystemArgs);
+    // Wait until room is loaded
+    yield return LoadRoomAsync(roomName);
+}</code></pre><h2 id="c999aced-5091-431b-af73-d715310f2abf" class="">The Good</h2><h3 id="c788effa-35e2-4e57-a914-536f9c3673dc" class="">Easy to debug and test</h3><p id="0ad548d6-4262-446e-bad2-78b6c309e72d" class="">When implemented correctly, you can pretty much load into any part of your game with any configuration. Imagine a scenario where our DataService registers a key for events such as when a door is unlocked or when an item is collected, you can save this state and load into it to fix specific bugs.</p><h3 id="664b608a-4081-4f0f-b87c-88cbccf11ebc" class="">Common references are automatically available</h3><p id="f5c4f0b2-ff2c-4d3e-b827-54fac5c02af9" class="">Since the references your game system needs are passed down, it doesn’t have to reach out to grab it.</p><h3 id="ba00b71d-ca6f-44b6-a0a6-ca16839e2a44" class="">Decoupling setup and data</h3><p id="9b13e873-fd8d-47b0-b680-b3033c58a208" class="">If every level you have is a scene file, then modifying the setup globally could be an issue. Here, the setup is represented with a single scene for each system.</p><h3 id="9180d057-91d0-4e08-abce-8a949657a77f" class="">Decoupling game systems and state</h3><p id="b28f0f4a-bcbd-4b11-b0e5-5d07fa349653" class="">Where this really shines is when you have a lot of information communicated between scenes. The state can live in the DataService, passed around and read to/from. It becomes independent from any scene, without resorting to persisting with DontDestroyOnLoad, or making anything static.</p><h2 id="ba24cf95-bcbf-458d-8cb4-7ee0c3105a0a" class="">The Bad</h2><h3 id="42af16a6-a015-401e-83d6-46ba3cca33d2" class="">A bit complicated to understand</h3><p id="e04cc81c-79dc-4d53-a556-eb710e533122" class="">Compared to many other paradigms, this can be considered a bit advanced.</p><h3 id="4c2fd9c0-c970-4ffc-b2f7-408442b08d27" class="">Not perfect for every scenario</h3><p id="5dd05f31-68f5-45cc-83a6-13c5cffbc00f" class="">This works in many scenarios, but it might be a bit over-engineered for others. You can still use parts of it in that case, or come up with something more useful for you.</p><h3 id="8bbc369b-4ef8-47df-b8d7-bd31487cddf4" class="">Might need more editor tools</h3><p id="2468fa04-0ab8-421e-b8c2-0d88bedb1540" class="">The premise here is that you really have a few systems but a lot of game data. While this is a step in the right direction, it puts the responsibility on you to maintain this game data. If you have a lot of game rooms, it might be worth it to create more editor tools to ensure integrity, help you find issues and mismatches better, and generate this data as fast as possible.</p><p id="e90782cf-10a4-4ad2-ab90-25d916f92638" class="">
+</p><hr id="ffe0a27b-a1fc-4278-8a9e-857865ae08ad"/><h1 id="3ea9a63e-5687-42b3-b3b3-06d132397bb2" class=""><em>3.6 </em>Next Steps: Figuring Out a Suitable Paradigm</h1><p id="b907f178-ee81-4cc8-8d0a-4a7400f594ed" class="">In this section we talked about architecture paradigms in Unity, we examined Unity’s default paradigm, and examined sample paradigms that might give you a clue as to where to go next.</p><p id="d22953fe-963c-4642-9462-5741de9ba6f0" class="">An important takeaway here is that there could be multiple possible solutions to the same problem. So don’t halt your progress by pondering on this for too long. Sometimes, the best way to find out is by trying.</p><p id="57a01b98-221b-4cf8-9c0a-fab34195dd4a" class="">It’s worthwhile to note that the paradigms presented in this section were mere samples. In most cases, you’d probably come up with a custom solution. Sometimes, you’d mix and match between different paradigms. Naturally, this comes down to what your project needs.</p><p id="e49a96bc-2c7a-476b-a20e-75ae484f82b7" class="">Here are some questions that might help you figure out a custom solution to implement.</p><ol type="1" id="267023f9-004d-4bc6-8fcb-68c3e1a2eca1" class="numbered-list" start="1"><li>Do you have a few systems and a lot of data?</li></ol><ol type="1" id="4aa3fadb-a760-4fd1-be86-367d1d1ed356" class="numbered-list" start="2"><li>Is Unity’s workflow ideal for your case? Could something be improved that would result in production going faster?</li></ol><ol type="1" id="25f9261a-0ceb-444a-93e3-c39514d130a8" class="numbered-list" start="3"><li>Are scene files a sufficient way to describe levels in your game? How can that be improved?</li></ol><ol type="1" id="6ec470a2-df98-409b-8f5a-678cff43d062" class="numbered-list" start="4"><li>Do most of your features fit into a clear top-down hierarchy?</li></ol><ol type="1" id="777911d4-a5e5-482f-9c7a-1d7d19b1286f" class="numbered-list" start="5"><li>Do you have persistent states in your game or data communicated between scenes? How are you planning to implement that?</li></ol></div></article></body></html>
